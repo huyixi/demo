@@ -1,6 +1,9 @@
+import "@/app/styles/globals.css";
 import type { Metadata } from "next";
+
+import { siteConfig } from "@/app/config/site";
 import localFont from "next/font/local";
-import "./globals.css";
+import SiteHeader from "@/components/side-header";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -14,8 +17,23 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "OneDesign",
-  description: "OneDesign",
+  title: siteConfig.name,
+  description: siteConfig.description,
+  authors: [
+    {
+      name: "huyixi",
+      url: "https://huyixi.com",
+    },
+  ],
+  creator: "huyixi",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: siteConfig.url,
+    title: siteConfig.name,
+    description: siteConfig.description,
+    siteName: siteConfig.name,
+  },
 };
 
 export default function RootLayout({
@@ -25,7 +43,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <SiteHeader />
+        {children}
+      </body>
     </html>
   );
 }
